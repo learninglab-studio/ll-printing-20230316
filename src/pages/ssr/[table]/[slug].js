@@ -4,7 +4,7 @@ import { Stringify } from '@/components/utilities'
 import llog from "@/lib/utils/ll-loggers"
 import Markdown from '@/components/utilities/Markdown'
 import Card from '@/components/mk/Card'
-import BigName from '@/components/printing/BigName'
+import BigName from '@/components/printing/Title'
 
 const yourTable = "MDFApplications"
 const yourView = "ForPrinting"

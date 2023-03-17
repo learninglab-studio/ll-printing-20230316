@@ -1,0 +1,11 @@
+.container {
+    width: 80%;
+    margin: auto;
+}
+
+@media print {
+    .container {
+        width: 100%;
+    }
+    
+}
