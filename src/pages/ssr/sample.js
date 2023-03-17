@@ -5,9 +5,9 @@ import { Stringify } from "@/components/utilities"
 import Link from "next/link"
 
 // change these
-const yourTable = "Tasks"
-const yourView = "THE_MENU"
-const slugField = "TaskID"
+const yourTable = "MDFApplications"
+const yourView = "ForPrinting"
+const slugField = "airtableURL"
 
 // this is your page code
 function Page({ data }) {
@@ -19,7 +19,7 @@ function Page({ data }) {
                 <p>We got {data.length} records back. You can now loop through them to do something with the data. Like let's create links to other pages that we'll also generate server-side.</p> 
                 {data.map((e, i)=>{return(
                     
-                    <Link href={`/ssr/${e._table.name}/${e.fields[slugField]}`}>
+                    <Link href={`/ssr/${e._table.name}/${encodeURI(e.fields[slugField])}`}>
                     <div
                     style={{
                       backgroundColor: 'rgba(20,20,30,.7)',
@@ -29,7 +29,7 @@ function Page({ data }) {
                     //   display: 'block',
                       margin: '10px auto'
                     }}>
-                    {e.fields.Title}
+                    {e.fields.Name} link text: {e.fields[slugField]}
                   </div>
                   
                     </Link>
@@ -48,7 +48,7 @@ export async function getServerSideProps() {
         baseId: process.env.AIRTABLE_BASE_ID,
         table: yourTable,
         view: yourView,
-        maxRecords: 10
+        maxRecords: 50
     })
     // logging the data to the (server-side) console
     llog.cyan(atData)

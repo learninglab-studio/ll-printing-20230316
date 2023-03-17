@@ -4,10 +4,11 @@ import { Stringify } from '@/components/utilities'
 import llog from "@/lib/utils/ll-loggers"
 import Markdown from '@/components/utilities/Markdown'
 import Card from '@/components/mk/Card'
+import BigName from '@/components/printing/BigName'
 
-const yourTable = "Tasks"
-const yourView = "THE_MENU"
-const yourField = "TaskID"
+const yourTable = "MDFApplications"
+const yourView = "ForPrinting"
+const yourField = "airtableURL"
 
 const Page = ({data}) => {
   const router = useRouter()
@@ -16,6 +17,7 @@ const Page = ({data}) => {
     <div>
         <h1>{data.fields.Title}</h1>
         <p>{data.fields.Description}</p>
+        <BigName>{data.fields.Name}</BigName>
         <Card
           title={data.fields.Title}
           description={data.fields.Description}
@@ -30,6 +32,7 @@ const Page = ({data}) => {
 
 export async function getServerSideProps(context) {
   try {
+    llog.red("accessing airtable")
     const atData = await findRecordByValue({
       baseId: process.env.AIRTABLE_BASE_ID,
       table: context.params.table,
